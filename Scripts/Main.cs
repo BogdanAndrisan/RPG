@@ -22,9 +22,12 @@ public class Main : MonoBehaviour {
 		for(int i=0;i<enemies.Length;i++){
 			enemyList.Add(enemies[i]);
 		}
+		
 	}	
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Tab)){
+			for(int i=0;i<enemyList.Count;i++)
+				Debug.Log(Vector3.Distance(enemies[i].transform.localPosition,this.transform.position).ToString());
 			if(selectEnemy>=enemyList.Count){
 				selectEnemy=0;
 			}
