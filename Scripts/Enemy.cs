@@ -10,11 +10,14 @@ public class Enemy : MonoBehaviour {
 	public Main main;
 	private Quaternion originalRot;
 	private Vector3 originalPos;
+	public float delay=0;
+
 	void Start () {
 		animator=GetComponent<Animator>();
 		main = FindObjectOfType<Main>();
 		originalRot=this.transform.rotation;
 		originalPos=this.transform.position;
+
 	}
 	void OnGUI(){
 		if(selected==true){
@@ -25,8 +28,22 @@ public class Enemy : MonoBehaviour {
 		HP-=10;
 		enemyHit=true;
 	}
+	void stopAttack(){
+		animator.SetBool("attack",false);
+	}
+	void damagePlayer(){
+		main.HP--;
+	}
 	void Update () {
-		if(Vector3.Distance(this.transform.position,main.transform.position)<5 && Vector3.Distance(this.transform.position,main.transform.position)>1){
+		delay-=Time.deltaTime;
+		if(Vector3.Distance(this.transform.position,main.transform.position)<1.6f && delay<=0){
+			animator.SetBool("attack",true);
+			Invoke("stopAttack",0.63f);
+			Invoke("damagePlayer",0.3f);
+			delay=2f;
+
+		}
+		if(Vector3.Distance(this.transform.position,main.transform.position)<5 && Vector3.Distance(this.transform.position,main.transform.position)>1.5f){
 			Vector3 targetPosition=new Vector3(main.transform.position.x,this.transform.position.y,main.transform.position.z);
 			//transform.LookAt(targetPosition);
 			Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
@@ -34,7 +51,7 @@ public class Enemy : MonoBehaviour {
 			animator.SetFloat("move",1f);
 		}
 		else{
-			if(Vector3.Distance(this.transform.position,main.transform.position)<1){
+			if(Vector3.Distance(this.transform.position,main.transform.position)<1.6f){
 				Vector3 targetPosition=new Vector3(main.transform.position.x,this.transform.position.y,main.transform.position.z);
 				Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
 				transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime*5);
@@ -45,6 +62,7 @@ public class Enemy : MonoBehaviour {
 				animator.SetFloat("move",0f);
 			}
 		}
+
 		if(HP<=0){
 			main.EXP+=100;
 			Destroy(gameObject);
