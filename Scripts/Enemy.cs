@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 	private Animator animator;
-	private int HP = 100;
+	private int HP = 10;
 	private bool test=false;
 	private bool enemyHit=false;
 	public bool selected=false;

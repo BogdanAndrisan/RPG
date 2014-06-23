@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Main : MonoBehaviour {
 
 	public List<Enemy> enemyList=new List<Enemy>();
+	public Enemy temp;
 	public float EXP=0;
 	public Enemy[] enemies;
 	public GameObject _fireBall;
@@ -26,8 +27,18 @@ public class Main : MonoBehaviour {
 	}	
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Tab)){
+			for(int i=0;i<(enemyList.Count-1);++i){
+				for(int j=0;j<(enemyList.Count-1-i);++j){
+					if(Vector3.Distance(enemyList[j].transform.position,this.transform.position)>
+					   Vector3.Distance(enemyList[j+1].transform.position,this.transform.position)){
+						temp=enemyList[j+1];
+						enemyList[j+1]=enemyList[j];
+						enemyList[j]=temp;
+					}
+				}
+			}
 			for(int i=0;i<enemyList.Count;i++)
-				Debug.Log(Vector3.Distance(enemies[i].transform.localPosition,this.transform.position).ToString());
+				Debug.Log(Vector3.Distance(enemyList[i].transform.localPosition,this.transform.position).ToString());
 			if(selectEnemy>=enemyList.Count){
 				selectEnemy=0;
 			}
@@ -36,8 +47,6 @@ public class Main : MonoBehaviour {
 			}
 			enemyList[selectEnemy].selected=true;
 			selectEnemy++;
-
-
 		}
 
 		if(fireGenCheck==false){
