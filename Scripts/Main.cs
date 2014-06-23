@@ -3,24 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 public class Main : MonoBehaviour {
 
-	public float HP=100;
-	public float EXP=0;
-
 	public List<Enemy> enemyList=new List<Enemy>();
 	public Enemy temp;
-
+	public float HP=100;
+	public float EXP=0;
 	public Enemy[] enemies;
 	public GameObject _fireBall;
-	public GameObject _camera;
+	public Transform _camera;
 	public Transform hand;
 	protected Animator animator;
 	public GameObject skelly;
 	int selectEnemy=0;
 	static public bool fireGenCheck=false;
-	public void setValues(int HP,int EXP){
-		this.HP=HP;
-		this.EXP=EXP;
-	}
 	void OnGUI(){
 		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+EXP.ToString());
 		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+HP.ToString());
@@ -28,7 +22,6 @@ public class Main : MonoBehaviour {
 	void Start () {
 		GameObject newObj=Instantiate(skelly,new Vector3(0,0,0),Quaternion.identity) as GameObject;
 		newObj.name="Skelly";
-		_camera = GameObject.FindGameObjectWithTag("MainCamera");
 		animator = GetComponent<Animator>();
 		enemies = FindObjectsOfType<Enemy>();
 		for(int i=0;i<enemies.Length;i++){
