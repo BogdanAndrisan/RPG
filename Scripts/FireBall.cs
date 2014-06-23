@@ -24,7 +24,7 @@ public class FireBall : MonoBehaviour {
 			this.transform.position=Ethan_hand.transform.position;
 		}
 		if(check==false){
-			if(Input.GetMouseButton(0)){
+			if(Input.GetMouseButton(1)){
 				Invoke ("wait",0.3f);
 			}
 		}

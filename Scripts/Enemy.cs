@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour {
 		animator.SetBool("attack",false);
 	}
 	void damagePlayer(){
-		main.HP--;
+		main.att.HP--;
 	}
 	void Update () {
 		delay-=Time.deltaTime;
@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour {
 		}
 
 		if(HP<=0){
-			main.EXP+=100;
+			main.att.EXP+=100;
 			Destroy(gameObject);
 			main.enemyList.Remove(this);
 		}

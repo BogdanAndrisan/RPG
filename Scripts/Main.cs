@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class Main : MonoBehaviour {
 
-	public float HP=100;
-	public float EXP=0;
+	public Attributes att=new Attributes();
 
 	public List<Enemy> enemyList=new List<Enemy>();
 	public Enemy temp;
@@ -17,13 +16,13 @@ public class Main : MonoBehaviour {
 	public GameObject skelly;
 	int selectEnemy=0;
 	static public bool fireGenCheck=false;
-	public void setValues(int HP,int EXP){
-		this.HP=HP;
-		this.EXP=EXP;
+	public void setValues(int STR){
+		att.strength = STR;
+		att.HP=att.getHP();
 	}
 	void OnGUI(){
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+EXP.ToString());
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+HP.ToString());
+		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+att.EXP.ToString());
+		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+att.HP.ToString());
 	}
 	void Start () {
 		GameObject newObj=Instantiate(skelly,new Vector3(0,0,0),Quaternion.identity) as GameObject;
@@ -37,6 +36,24 @@ public class Main : MonoBehaviour {
 		
 	}	
 	void Update () {
+		SelectEnemy();
+		FireballCheck();
+	}
+	void FireballCheck(){
+		if(fireGenCheck==false){
+			if(Input.GetKeyDown(KeyCode.E)){
+				Instantiate(_fireBall,hand.transform.position,_camera.transform.rotation);
+				fireGenCheck=true;
+			}
+		}
+		if(Input.GetMouseButtonDown(1)){
+			animator.SetBool("LeftClick", true);
+		}
+		else{
+			animator.SetBool("LeftClick", false);
+		}
+	}
+	void SelectEnemy(){
 		if(Input.GetKeyDown(KeyCode.Tab)){
 			if(enemyList.Count>0){
 				for(int i=0;i<(enemyList.Count-1);++i){
@@ -65,17 +82,5 @@ public class Main : MonoBehaviour {
 				selectEnemy++;
 			}
 		}
-
-		if(fireGenCheck==false){
-			if(Input.GetKeyDown(KeyCode.E)){
-				Instantiate(_fireBall,hand.transform.position,_camera.transform.rotation);
-				fireGenCheck=true;
-			}
-		}
-		if(Input.GetMouseButtonDown(0)){
-			animator.SetBool("LeftClick", true);
-		}
-		else
-			animator.SetBool("LeftClick", false);
 	}
 }

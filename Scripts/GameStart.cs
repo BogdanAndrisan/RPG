@@ -7,6 +7,6 @@ public class GameStart : MonoBehaviour {
 	private GameObject player; 
 	void Awake(){
 		player=Instantiate(playerPrefab,Vector3.zero,Quaternion.identity) as GameObject;
-		player.GetComponent<Main>().setValues(278,0);
+		player.GetComponent<Main>().setValues(10);
 	}
 }
