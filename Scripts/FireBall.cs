@@ -15,6 +15,7 @@ public class FireBall : MonoBehaviour {
 		Ethan_hand = GameObject.Find("char_ethan_RightHandMiddle1");
 		camera = GameObject.Find("Main Camera");
 		this.rigidbody.useGravity=false;
+		this.collider.enabled=false;
 	}
 	void Update () {
 
@@ -33,6 +34,7 @@ public class FireBall : MonoBehaviour {
 		this.transform.rotation=camera.transform.rotation;
 		rigidbody.AddRelativeForce(Vector3.forward*1);
 		this.rigidbody.useGravity = true;
+		this.collider.enabled = true;
 		check=true;
 		Main.fireGenCheck=false;
 
@@ -45,12 +47,12 @@ public class FireBall : MonoBehaviour {
 		IC.particleEmitter.maxEmission=0;
 		OC.particleEmitter.minEmission=0;
 		OC.particleEmitter.maxEmission=0;
-		Invoke("wait2",2);
+		wait2 ();
 	}
 	//need fix
 	void OnCollisionEnter(Collision collision) {
 		IC.particleEmitter.rndVelocity=new Vector3(2,2,2);
-		Invoke ("DestroyGO",0.1f);
+		DestroyGO();
 		if(collision.gameObject.name=="Enemy"){
 			Debug.Log("Enemy hit");
 		}

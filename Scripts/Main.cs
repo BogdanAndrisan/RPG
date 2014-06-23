@@ -11,13 +11,16 @@ public class Main : MonoBehaviour {
 	public Transform _camera;
 	public Transform hand;
 	protected Animator animator;
-	public Enemy enemy;
+	public GameObject skelly;
 	int selectEnemy=0;
 	static public bool fireGenCheck=false;
 	void OnGUI(){
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),EXP.ToString());
+		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+EXP.ToString());
 	}
 	void Start () {
+
+		GameObject newObj=Instantiate(skelly,new Vector3(0,0,0),Quaternion.identity) as GameObject;
+		newObj.name="Skelly";
 		animator = GetComponent<Animator>();
 		enemies = FindObjectsOfType<Enemy>();
 		for(int i=0;i<enemies.Length;i++){
