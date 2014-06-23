@@ -36,7 +36,7 @@ public class FireBall : MonoBehaviour {
 		this.rigidbody.useGravity = true;
 		this.collider.enabled = true;
 		check=true;
-		Main.fireGenCheck=false;
+		Player.fireGenCheck=false;
 
 	}
 	void wait2(){
