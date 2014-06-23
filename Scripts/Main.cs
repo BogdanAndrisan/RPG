@@ -44,8 +44,12 @@ public class Main : MonoBehaviour {
 			}
 			for(int i=0;i<enemyList.Count;i++){
 				enemyList[i].selected=false;
+				enemyList[i].particleEmitter.minEmission=0;
+				enemyList[i].particleEmitter.maxEmission=0;
 			}
 			enemyList[selectEnemy].selected=true;
+			enemyList[selectEnemy].particleEmitter.minEmission=50;
+			enemyList[selectEnemy].particleEmitter.maxEmission=50;
 			selectEnemy++;
 		}
 
