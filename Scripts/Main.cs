@@ -36,6 +36,7 @@ public class Main : MonoBehaviour {
 		
 	}	
 	void Update () {
+		att.LevelUp();
 		SelectEnemy();
 		FireballCheck();
 	}
