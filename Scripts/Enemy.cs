@@ -4,7 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 	private Animator animator;
 	public int HP = 10;
-	public bool selected=false;
+	public int index;
 	private bool test=false;
 	private bool enemyHit=false;
 	public Player player;
@@ -72,7 +72,9 @@ public class Enemy : MonoBehaviour {
 		if(HP<=0){
 			player.att.EXP+=100;
 			Destroy(gameObject);
+			guiScript.selectEnemy--;
 			guiScript.enemyList.Remove(this);
+
 		}
 	}
 	void DanceDanceRevolution(){

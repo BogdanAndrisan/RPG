@@ -7,7 +7,7 @@ public class GUIscript : MonoBehaviour {
 	public Enemy temp;
 	public Enemy[] enemies;
 	public GameObject skelly;
-	private int selectEnemy=0;
+	public int selectEnemy=0;
 	void Start(){
 		GameObject newObj=Instantiate(skelly,new Vector3(0,0,0),Quaternion.identity) as GameObject;
 		newObj.name="Skelly";
@@ -23,13 +23,11 @@ public class GUIscript : MonoBehaviour {
 		ShowSelectedEnemyGUI();
 	}
 	void ShowSelectedEnemyGUI(){
-		if(selectEnemy==0){
-			if(enemyList[selectEnemy].selected==true){
-				GUI.Box(new Rect(20,20, 200, 20), enemyList[selectEnemy].gameObject.name.ToString()+" : "+enemyList[selectEnemy].HP.ToString());
-			}
-		}else{
-			if(enemyList[selectEnemy-1].selected==true){
-				GUI.Box(new Rect(20,20, 200, 20), enemyList[selectEnemy-1].gameObject.name.ToString()+" : "+enemyList[selectEnemy-1].HP.ToString());
+		if(enemyList.Count>0){
+			if(enemyList[0]){
+				GUI.Box(new Rect(20,20, 200, 20), enemyList[0].gameObject.name.ToString()+" : "+enemyList[0].HP.ToString());
+				enemyList[0].particleEmitter.minEmission=200;
+				enemyList[0].particleEmitter.maxEmission=200;
 			}
 		}
 	}
@@ -52,18 +50,12 @@ public class GUIscript : MonoBehaviour {
 				}
 				for(int i=0;i<enemyList.Count;i++)
 					Debug.Log(Vector3.Distance(enemyList[i].transform.localPosition,player.transform.position).ToString());
-				if(selectEnemy>=enemyList.Count){
-					selectEnemy=0;
-				}
+	
 				for(int i=0;i<enemyList.Count;i++){
-					enemyList[i].selected=false;
+					enemyList[i].index=i;
 					enemyList[i].particleEmitter.minEmission=0;
 					enemyList[i].particleEmitter.maxEmission=0;
 				}
-				enemyList[selectEnemy].selected=true;
-				enemyList[selectEnemy].particleEmitter.minEmission=150;
-				enemyList[selectEnemy].particleEmitter.maxEmission=150;
-				selectEnemy++;
 			}
 		}
 	}
