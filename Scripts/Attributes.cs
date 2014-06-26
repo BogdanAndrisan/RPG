@@ -5,7 +5,8 @@ public class Attributes{
 
 	public int statPoints=0;
 	public int level = 1;
-	public int EXP=0;
+	public int EXP=1;
+	public int EXPtoLevel;
 
 	private int baseHP = 100;
 	private int baseMP = 100;
@@ -59,11 +60,13 @@ public class Attributes{
 		calcHP();//recalculate HP when leveled;
 		calcMP();//and MP;
 		calcEN();//and EN,yeh, smartz.
+		EXPtoLevel=level*90;
 	}
 	public void LevelUp(){
 		if(EXP>level*90){
 			EXP=EXP-level*90;
 			level++;
+			EXPtoLevel=level*90;
 			statPoints+=5;
 			STR++;
 			AGI++;

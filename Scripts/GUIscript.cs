@@ -8,6 +8,8 @@ public class GUIscript : MonoBehaviour {
 	public Enemy[] enemies;
 	public GameObject skelly;
 	public int selectEnemy=0;
+
+	public GUISkin skin;
 	void Start(){
 		GameObject newObj=Instantiate(skelly,new Vector3(0,0,0),Quaternion.identity) as GameObject;
 		newObj.name="Skelly";
@@ -18,14 +20,37 @@ public class GUIscript : MonoBehaviour {
 		}
 	}
 	void OnGUI(){
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+player.att.EXP.ToString());
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+player.att.getHP().ToString());
+		GUI.skin = skin;
+		PlayerGUI();
 		ShowSelectedEnemyGUI();
+	}
+	void PlayerGUI(){
+		GUI.Box (new Rect(20,5,150,20),player.name+" - "+player.att.level,"HPBar");
+		GUI.Box (new Rect(10,5,10,20),"","HPBarLeft");
+		GUI.Box (new Rect(170,5,10,20),"","HPBarRight");
+		GUI.Box (new Rect(40,Screen.height-20,(float)((Screen.width-80)*(player.att.EXP/player.att.EXPtoLevel)),20),"","HPBar");
+		GUI.Box (new Rect(40,Screen.height-20,Screen.width-80,20),"Exp:"+player.att.EXP.ToString());
+		GUI.Box (new Rect(30,Screen.height-20,10,20),"","HPBarLeft");
+		GUI.Box (new Rect(Screen.width-40,Screen.height-20,10,20),"","HPBarRight");
+		GUI.Box (new Rect(20,30,150,20),"HP:"+player.att.getHP().ToString(),"HPBar");
+		GUI.Box (new Rect(10,30,10,20),"","HPBarLeft");
+		GUI.Box (new Rect(170,30,10,20),"","HPBarRight");
+		GUI.Box (new Rect(20,55,150,20),"MP:"+player.att.getMP().ToString(),"MPBar");
+		GUI.Box (new Rect(10,55,10,20),"","MPBarLeft");
+		GUI.Box (new Rect(170,55,10,20),"","MPBarRight");
+		GUI.Box (new Rect(20,80,150,20),"EN:"+player.att.getEN().ToString(),"ENBar");
+		GUI.Box (new Rect(10,80,10,20),"","ENBarLeft");
+		GUI.Box (new Rect(170,80,10,20),"","ENBarRight");
+	}
+	void EnemyGUI(){
+		GUI.Box(new Rect(200,30, 150, 20), enemyList[0].gameObject.name.ToString()+" : "+enemyList[0].HP.ToString());
+		GUI.Box (new Rect(190,30,10,20),"","HPBarLeft");
+		GUI.Box (new Rect(350,30,10,20),"","HPBarRight");
 	}
 	void ShowSelectedEnemyGUI(){
 		if(enemyList.Count>0){
 			if(enemyList[0]){
-				GUI.Box(new Rect(20,20, 200, 20), enemyList[0].gameObject.name.ToString()+" : "+enemyList[0].HP.ToString());
+				EnemyGUI ();
 				enemyList[0].particleEmitter.minEmission=200;
 				enemyList[0].particleEmitter.maxEmission=200;
 			}

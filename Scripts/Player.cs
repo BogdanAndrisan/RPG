@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 			"char_ethan_Spine1/char_ethan_Spine2/char_ethan_Neck/char_ethan_RightShoulder/char_ethan_RightArm/" +
 			"char_ethan_RightForeArm/char_ethan_RightHand/char_ethan_RightHandMiddle1");
 		animator = GetComponent<Animator>();
+		name="Player";
 	}	
 	void Update () {
 		att.LevelUp();
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.E)){
 				Instantiate(_fireBall,hand.transform.position,_camera.transform.rotation);
 				fireGenCheck=true;
+				att.setMP(att.getMP()-1);
 			}
 		}
 		if(Input.GetMouseButtonDown(1)){
