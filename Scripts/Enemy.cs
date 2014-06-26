@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour {
 		animator.SetBool("attack",false);
 	}
 	void damagePlayer(){
-		player.att.HP--;
+		player.att.setHP(player.att.getHP()-1);
 	}
 	void Update () {
 		BasicMoveAI();

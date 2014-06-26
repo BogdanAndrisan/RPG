@@ -19,7 +19,7 @@ public class GUIscript : MonoBehaviour {
 	}
 	void OnGUI(){
 		GUI.Box (new Rect(Screen.width/2-100,Screen.height-20,200,20),"Exp:"+player.att.EXP.ToString());
-		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+player.att.HP.ToString());
+		GUI.Box (new Rect(Screen.width/2-100,Screen.height-45,200,20),"HP:"+player.att.getHP().ToString());
 		ShowSelectedEnemyGUI();
 	}
 	void ShowSelectedEnemyGUI(){

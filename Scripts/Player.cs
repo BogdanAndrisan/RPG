@@ -4,16 +4,16 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour {
 	
 	public Attributes att=new Attributes();
-	
 
 	public GameObject _fireBall;
 	public GameObject _camera;
 	public Transform hand;
 	protected Animator animator;
 	static public bool fireGenCheck=false;
+
 	public void setValues(int STR){
-		att.strength = STR;
-		att.HP=att.getHP();
+		att.STR = STR;
+		att.Recalculate();
 	}
 	void Start () {
 		_camera = GameObject.FindGameObjectWithTag("MainCamera");
