@@ -5,44 +5,75 @@ public class Attributes{
 
 	public int statPoints=0;
 	public int level = 1;
-	public int EXP=1;
+	public int EXP=0;
 	public int EXPtoLevel;
 
 	private int baseHP = 100;
 	private int baseMP = 100;
 	private int baseEN = 100;
-	private int HP;
-	private int MP;
-	private int EN;
+	private int HitPoints;
+	private int ManaPoints;
+	private int EnergyPoints;
+	private int MaxHitPoints;
+	private int MaxManaPoints;
+	private int MaxEnergyPoints;
 	private int strength;
 	private int agility;
 	private int intelligence;
+
+	public void Recalculate(){
+		MaxHP=calcHP();//recalculate HP when leveled;
+		MaxMP=calcMP();//and MP;
+		MaxEN=calcEN();//and EN,yeh, smartz.
+		HP=MaxHP;
+		MP=MaxMP;
+		EN=MaxEN;
+		EXPtoLevel=level*90;
+	}
+	public void LevelUp(){
+		if(EXP>level*90){
+			EXP=EXP-level*90;
+			level++;
+			statPoints+=5;
+			STR++;
+			AGI++;
+			INT++;
+			Recalculate();
+		}
+	}
+
 	public int calcHP(){
-		return HP=baseHP+(int)(level*level)+(int)(strength*5);
+		return baseHP+(int)(level*level)+(int)(strength*5);
 	}
 	public int calcMP(){
-		return MP=baseMP+(int)(level*level)+(int)(intelligence*4);
+		return baseMP+(int)(level*level)+(int)(intelligence*4);
 	}
 	public int calcEN(){
-		return EN=baseEN+(int)(level*level)+(int)(agility*3);
+		return baseEN+(int)(level*level)+(int)(agility*3);
 	}
-	public int getHP(){
-		return HP;
+	public int MaxHP{
+		get{return MaxHitPoints;}
+		set{MaxHitPoints = value;}
 	}
-	public int getMP(){
-		return MP;
+	public int MaxMP{
+		get{return MaxManaPoints;}
+		set{MaxManaPoints = value;}
 	}
-	public int getEN(){
-		return EN;
+	public int MaxEN{
+		get{return MaxEnergyPoints;}
+		set{MaxEnergyPoints = value;}
 	}
-	public void setHP(int HP){
-		this.HP=HP;
+	public int HP{
+		get{return HitPoints;}
+		set{HitPoints = value;}
 	}
-	public void setMP(int MP){
-		this.MP=MP;
+	public int MP{
+		get{return ManaPoints;}
+		set{ManaPoints = value;}
 	}
-	public void setEN(int EN){
-		this.EN=EN;
+	public int EN{
+		get{return EnergyPoints;}
+		set{EnergyPoints = value;}
 	}
 	public int STR{
 		get{return strength;}
@@ -55,25 +86,5 @@ public class Attributes{
 	public int INT{
 		get{return intelligence;}
 		set{intelligence = value;}
-	}
-	public void Recalculate(){
-		calcHP();//recalculate HP when leveled;
-		calcMP();//and MP;
-		calcEN();//and EN,yeh, smartz.
-		EXPtoLevel=level*90;
-	}
-	public void LevelUp(){
-		if(EXP>level*90){
-			EXP=EXP-level*90;
-			level++;
-			EXPtoLevel=level*90;
-			statPoints+=5;
-			STR++;
-			AGI++;
-			INT++;
-			calcHP();//recalculate HP when leveled;
-			calcMP();//and MP;
-			calcEN();//and EN,yeh, smartz.
-		}
 	}
 }

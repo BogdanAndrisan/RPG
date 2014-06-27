@@ -28,17 +28,17 @@ public class GUIscript : MonoBehaviour {
 		GUI.Box (new Rect(20,5,150,20),player.name+" - "+player.att.level,"HPBar");
 		GUI.Box (new Rect(10,5,10,20),"","HPBarLeft");
 		GUI.Box (new Rect(170,5,10,20),"","HPBarRight");
-		GUI.Box (new Rect(40,Screen.height-20,(float)((Screen.width-80)*(player.att.EXP/player.att.EXPtoLevel)),20),"","HPBar");
-		GUI.Box (new Rect(40,Screen.height-20,Screen.width-80,20),"Exp:"+player.att.EXP.ToString());
+		GUI.Box (new Rect(40,Screen.height-20,(Screen.width-80)*((float)player.att.EXP/(float)player.att.EXPtoLevel),20),"","HPBar");
+		GUI.Box (new Rect(40,Screen.height-20,Screen.width-80,20),player.att.EXP.ToString()+" / "+player.att.EXPtoLevel.ToString());
 		GUI.Box (new Rect(30,Screen.height-20,10,20),"","HPBarLeft");
 		GUI.Box (new Rect(Screen.width-40,Screen.height-20,10,20),"","HPBarRight");
-		GUI.Box (new Rect(20,30,150,20),"HP:"+player.att.getHP().ToString(),"HPBar");
+		GUI.Box (new Rect(20,30,150,20),"HP:"+player.att.HP.ToString()+"/"+player.att.MaxHP,"HPBar");
 		GUI.Box (new Rect(10,30,10,20),"","HPBarLeft");
 		GUI.Box (new Rect(170,30,10,20),"","HPBarRight");
-		GUI.Box (new Rect(20,55,150,20),"MP:"+player.att.getMP().ToString(),"MPBar");
+		GUI.Box (new Rect(20,55,150,20),"MP:"+player.att.MP.ToString(),"MPBar");
 		GUI.Box (new Rect(10,55,10,20),"","MPBarLeft");
 		GUI.Box (new Rect(170,55,10,20),"","MPBarRight");
-		GUI.Box (new Rect(20,80,150,20),"EN:"+player.att.getEN().ToString(),"ENBar");
+		GUI.Box (new Rect(20,80,150,20),"EN:"+player.att.EN.ToString(),"ENBar");
 		GUI.Box (new Rect(10,80,10,20),"","ENBarLeft");
 		GUI.Box (new Rect(170,80,10,20),"","ENBarRight");
 	}

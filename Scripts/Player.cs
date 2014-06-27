@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.E)){
 				Instantiate(_fireBall,hand.transform.position,_camera.transform.rotation);
 				fireGenCheck=true;
-				att.setMP(att.getMP()-1);
+				att.MP--;
 			}
 		}
 		if(Input.GetMouseButtonDown(1)){
