@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 			"char_ethan_Spine1/char_ethan_Spine2/char_ethan_Neck/char_ethan_RightShoulder/char_ethan_RightArm/" +
 			"char_ethan_RightForeArm/char_ethan_RightHand/char_ethan_RightHandMiddle1");
 		animator = GetComponent<Animator>();
-		name="Player";
+		name="Tosatsu";
 	}	
 	void Update () {
 		att.LevelUp();
